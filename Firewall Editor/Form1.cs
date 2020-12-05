@@ -61,6 +61,22 @@ namespace Firewall_Editor
             }
         }
 
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox s = sender as CheckBox;
+           
+            if (s.Checked){
+                Constants.DualMode = true;
+                radioButtonInbound.Enabled = false;
+                radioButtonOutbound.Enabled = false;
+            }
+            else
+            {
+                Constants.DualMode = false;
+                radioButtonInbound.Enabled = true;
+                radioButtonOutbound.Enabled = true;
+            }
+        }
 
         private void radioButtonDirection_CheckedChanged(object sender, EventArgs e)
         {
@@ -74,14 +90,61 @@ namespace Firewall_Editor
             }
         }
 
+
+        private void flipDirection()
+        {
+            if (Constants.Direction.Equals("Inbound"))
+            {
+                Constants.Direction = "Outbound";
+            }
+            else
+            {
+                Constants.Direction = "Inbound";
+            }
+        }
+
         private void buttonApply_Click(object sender, EventArgs e)
         {
             int count = 1;
+            Constants.currentCount = 1;
             Constants.maxCount = checkedListBox1.Items.Count;
             progressBar1.Maximum = Constants.maxCount;
 
+            if (!textBoxPrefix.Text.Trim().Equals(""))
+            {
+                Constants.prefix = textBoxPrefix.Text.Trim();
+            }
+            
 
-            Constants.prefix = textBoxPrefix.Text.Trim();
+            
+            if (Constants.DualMode)
+            {
+                flipDirection();
+
+                Constants.maxCount += Constants.maxCount;
+                progressBar1.Maximum = Constants.maxCount;
+
+                foreach (string item in checkedListBox1.CheckedItems)
+                {
+
+                    string countText = "";
+                    if (count < 10)
+                    {
+                        countText = "0";
+                    }
+                    countText += count.ToString();
+                    runCommand(item, countText);
+
+                    Constants.currentCount++;
+                    updateProgressBar();
+
+                    count++;
+                }
+
+                flipDirection();
+                count = 1;
+            }
+            
             foreach (string item in checkedListBox1.CheckedItems)
             {
                 
@@ -93,11 +156,12 @@ namespace Firewall_Editor
                 countText += count.ToString();
                 runCommand(item, countText);
 
-                Constants.currentCount = count;
+                Constants.currentCount++;
                 updateProgressBar();
 
                 count++;
             }
+
         }
 
         private void updateProgressBar()
@@ -120,5 +184,9 @@ namespace Firewall_Editor
             process.Start();
         }
 
+        private void textBoxPrefix_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
