@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.radioButtonAllow = new System.Windows.Forms.RadioButton();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -42,6 +43,9 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.labelProgress = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.textDragNotif = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.resetButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -51,11 +55,12 @@
             this.checkedListBox1.AllowDrop = true;
             this.checkedListBox1.CheckOnClick = true;
             this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.HorizontalScrollbar = true;
             this.checkedListBox1.Location = new System.Drawing.Point(12, 12);
             this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.ScrollAlwaysVisible = true;
             this.checkedListBox1.Size = new System.Drawing.Size(531, 424);
             this.checkedListBox1.TabIndex = 0;
-            this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
             this.checkedListBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.checkedListBox1_DragDrop);
             this.checkedListBox1.DragEnter += new System.Windows.Forms.DragEventHandler(this.checkedListBox1_DragEnter);
             // 
@@ -168,8 +173,9 @@
             // labelProgress
             // 
             this.labelProgress.AutoSize = true;
-            this.labelProgress.BackColor = System.Drawing.Color.Transparent;
+            this.labelProgress.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.labelProgress.Location = new System.Drawing.Point(665, 355);
+            this.labelProgress.Margin = new System.Windows.Forms.Padding(0);
             this.labelProgress.Name = "labelProgress";
             this.labelProgress.Size = new System.Drawing.Size(21, 13);
             this.labelProgress.TabIndex = 8;
@@ -188,14 +194,48 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // textDragNotif
+            // 
+            this.textDragNotif.BackColor = System.Drawing.SystemColors.Window;
+            this.textDragNotif.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textDragNotif.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textDragNotif.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.textDragNotif.Location = new System.Drawing.Point(16, 201);
+            this.textDragNotif.Margin = new System.Windows.Forms.Padding(0);
+            this.textDragNotif.Multiline = true;
+            this.textDragNotif.Name = "textDragNotif";
+            this.textDragNotif.Size = new System.Drawing.Size(504, 51);
+            this.textDragNotif.TabIndex = 9;
+            this.textDragNotif.Text = "To add a program simply drag & drop here.\r\nIf you add a folder, .exe\'s will be se" +
+    "arched for recursivly.";
+            this.textDragNotif.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textDragNotif.TextChanged += new System.EventHandler(this.textDragNotif_TextChanged);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // resetButton
+            // 
+            this.resetButton.Location = new System.Drawing.Point(638, 315);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(75, 23);
+            this.resetButton.TabIndex = 11;
+            this.resetButton.Text = "Reset";
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
+            // 
             // Form1
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.resetButton);
             this.Controls.Add(this.labelProgress);
+            this.Controls.Add(this.textDragNotif);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label1);
@@ -204,7 +244,8 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.checkedListBox1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Windows Firewall Editor";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.checkedListBox1_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.checkedListBox1_DragEnter);
             this.groupBox1.ResumeLayout(false);
@@ -232,6 +273,9 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label labelProgress;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TextBox textDragNotif;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Button resetButton;
     }
 }
 
